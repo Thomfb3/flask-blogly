@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="display-3 mt-3 mb-3 pb-3 border-bottom">Users</h1>
+
+    <div class="row p-2">
+        <div class="col-lg-6">
+            <h2 class="pt-4 pb-3 text-primary">All Users</h2>
+            <ul class="list-group list-group-flush p-3">
+            {% for user in users %}
+                <li class="list-group-item"><a href="/users/{{ user.id }}">{{ user.full_name }}</a></li>
+            {%  endfor %}
+            </ul>
+        </div><!--End of Column 1-->
+        
+        <div class="col-lg-6 border rounded p-4">
+            <h2 class="pb-3 text-primary">Create New User</h2>
+            <form action='/users/new' method="POST" class="">
+                <div class="mb-4">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input class="form-control" type="text" name="first_name" placeholder="John">
+                </div>
+                <div class="mb-4">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input class="form-control" type="text" name="last_name" placeholder="Smith">
+                </div>
+                <div class="mb-4">
+                        <label for="image_url" class="form-label">First Name</label>
+                        <input class="form-control" type="text" name="image_url" placeholder="http://images.com/yourimage">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3 w-100 p-3">Create User</button>
+            </form>
+        </div><!--End of Column 2-->
+
+    </div><!--End of Row-->
+
+</div><!--End of Container-->
+
+
+
+{% endblock %}
