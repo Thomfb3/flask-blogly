@@ -3,14 +3,13 @@
 {% block content %}
 
 <div class="container">
-    <h1 class="display-3 mt-3 mb-3 pb-3 border-bottom">Users</h1>
-
     <div class="row p-2 justify-content-center">
         <div class="col-lg-6">
-            <h2 class="pt-4 pb-3 text-primary">All Users</h2>
+            <h1 class="pt-4 pb-3 text-primary border-bottom">All Users</h1>
             <ul class="list-group list-group-flush p-3">
             {% for user in users %}
-                <li class="list-group-item"><a href="/users/{{ user.id }}">{{ user.full_name }}</a></li>
+                
+                <li class="list-group-item"><img class="rounded-circle me-3" width="60px" src="{{ user.image_url }}"><a href="/users/{{ user.id }}">{{ user.full_name }}</a></li>
             {%  endfor %}
             </ul>
         </div><!--End of Column 1-->
