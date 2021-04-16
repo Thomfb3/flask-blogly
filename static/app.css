@@ -4,7 +4,6 @@ nav {
     padding: 10px;
 }
 
-
 nav a {
     color: white;
     text-decoration: none;
@@ -35,9 +34,25 @@ body {
     margin: 0px;
     padding-bottom: 3px;
 }
-
+å
 .recent-post-details {
-    font-size: 11px;
+    font-size: 12px;
+}
+
+.list-bkgd-strip:nth-child(even) {
+    background-color: rgb(247, 247, 247);
+}
+
+.small-child-span {
+    font-size: 13px;
+}
+
+.large-child-span {
+    font-size: 16px;
+}
+
+.posts-list label {
+    color: #333;
 }
 
 footer {
@@ -49,3 +64,5 @@ footer {
     width: 100%;
     padding: 10px;
 }
+
+

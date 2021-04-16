@@ -9,6 +9,7 @@ def connect_db(app):
     db.init_app(app)
 
 
+
 # MODELS GO HERE 
 class User(db.Model):
     """User Model"""
@@ -23,10 +24,10 @@ class User(db.Model):
     # Backreference all posts for user and cascade delete posts
     posts = db.relationship("Post", backref="user", cascade="all, delete-orphan")
 
-    # Representation
+    # User Model Representation
     def __repr__(self):
         u = self
-        return f"<User id={u.id} first_name={u.first_name} last_name={u.last_name} image_url={u.image_url}"
+        return f"<User id={u.id} first_name={u.first_name} last_name={u.last_name} image_url={u.image_url} >"
 
     @property
     def full_name(self):
@@ -38,11 +39,9 @@ class User(db.Model):
         return f"{self.first_name} {self.last_name}"
 
 
-    
-
 
 class Post(db.Model):
-    """User Model"""
+    """Post Model"""
     __tablename__ = "posts"
 
     # Set time to eastern
@@ -55,10 +54,10 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=eastern)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    # Representation
+    # Post Model Representation
     def __repr__(self):
-        u = self
-        return f"<Post id={u.id} title={u.title} content=text created_at={u.created_at}"
+        p = self
+        return f"<Post id={p.id} title={p.title} content=text created_at={p.created_at} >"
 
     @property
     def date(self):
@@ -79,3 +78,37 @@ class Post(db.Model):
         return posts
 
 
+
+class Tag(db.Model):
+    """Tag Model"""
+    __tablename__ = "tags"
+    
+    # set the Tag table columns
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
+
+    # Backref Posts to tags
+    posts = db.relationship('Post', secondary="posts_tags", backref="tags")
+
+    # Tag Model Representation
+    def __repr__(self):
+        t = self
+        return f"<Tag id={t.id} name={t.name} >"
+
+    @property
+    def post_count(self):
+        """Post Count"""
+        post_count = len(self.posts)
+        return post_count
+
+
+
+
+
+class PostTag(db.Model):
+    """Post Tags Model"""
+    __tablename__ = "posts_tags"
+    
+    # set Post Tag table columns
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)

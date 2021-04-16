@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 border rounded p-4 ">
+            <h2 class="pb-3 text-primary">Create New Tag</h2>
+            <form action="/tags/new" method="POST" class="">
+                <div class="mb-4">
+                    <label for="name" class="form-label">Tag Name</label>
+                    <input class="form-control" type="text" name="name" placeholder="New Tag Name">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3 w-100 p-3">Create Tag</button>
+
+                <div class="mb-4 posts-list">
+                    <h4 class="text-primary mt-3">Add tag to posts</h4>
+                        
+                    {% for post in posts %}   
+                    <div class="p-1">
+                        <input class="" type="checkbox" id="post_{{ post.id }}" name="posts" value="{{ post.id }}">
+                        <label for="post_{{ post.id }}">{{ post.title }}</label><br>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </form>
+        </div>
+        <!--End of Column 2-->
+
+    </div>
+    <!--End of Row-->
+
+</div>
+<!--End of Container-->
+
+
+
+{% endblock %}

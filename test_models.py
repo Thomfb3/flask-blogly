@@ -3,7 +3,7 @@ from unittest import TestCase
 from flask import Flask, request, render_template, redirect, flash, session
 import datetime
 from app import app
-from models import db, User, Post
+from models import db, User, Post, Tag, PostTag
 
 # Use test database and don't clutter tests with SQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_test'
@@ -67,3 +67,22 @@ class PostModelTestCase(TestCase):
         self.assertEqual(post.title, "Hi there, here's a new post")
         self.assertEqual(post.content, "This is some test post content. It should be longer than 50 characters to test shorten content method.")
         self.assertNotEqual(post.short_content, "This is some test post content. It should be longer than 50 characters to test shorten content method.")
+
+
+
+class TagModelTestCase(TestCase):
+    """Tests for model for Users."""
+
+    def setUp(self): 
+        """Clean up any existing users."""
+        Tag.query.delete()
+
+    def tearDown(self):
+        """Clean up any fouled transaction."""
+        db.session.rollback()
+
+
+    def test_tag_properties(self):
+        tag = Tag(name="Cool")
+        self.assertEqual(tag.name, "Cool")
+        
